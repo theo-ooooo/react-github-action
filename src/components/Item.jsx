@@ -28,7 +28,8 @@ function Item({
     setEditedTitle(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const newTodoData = todoData.map((todo) => {
       if (todo.id === id) {
         return { ...todo, title: editedTitle };
