@@ -4,3 +4,14 @@
 - 컴포넌트로 구분하여 나눠 컴포넌트 설계
 - React.memo로 컴포넌트 최적화
 - useCallback 으로 함수 최적화
+  - 함수를 props로 내려줄때, 리렌더링 될때마다 함수를 재선언 하므로, 의존성 배열에 변하는 변수를 넣어두고
+  - 변수가 변할때마다 함수를 재선언하라고 useCallback를 사용하자.
+  ```
+    const handleClick = useCallback(
+    (id) => {
+      const newTodoData = todoData.filter((todo) => todo.id !== id);
+      setTodoData(newTodoData);
+    },
+    [todoData]
+  );
+  ```

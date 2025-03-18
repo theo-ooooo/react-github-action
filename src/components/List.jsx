@@ -2,7 +2,7 @@ import React from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import Item from "./Item";
 
-function List({ todoData, setTodoData }) {
+function List({ todoData, setTodoData, handleClick }) {
   console.log("List is Rendering");
   const handleEnd = (result) => {
     if (!result.destination) return;
@@ -40,6 +40,7 @@ function List({ todoData, setTodoData }) {
                     id={data.id}
                     title={data.title}
                     completed={data.completed}
+                    handleClick={handleClick}
                   />
                 )}
               </Draggable>

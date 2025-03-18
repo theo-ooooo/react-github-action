@@ -8,6 +8,7 @@ function Item({
   todoData,
   completed,
   id,
+  handleClick,
 }) {
   console.log("Item is Rendering");
   const handleCompleteChange = (id) => {
@@ -21,10 +22,6 @@ function Item({
     setTodoData(newTodoData);
   };
 
-  const handleClick = (id) => {
-    const newTodoData = todoData.filter((todo) => todo.id !== id);
-    setTodoData(newTodoData);
-  };
   return (
     <div
       {...provided.draggableProps}
