@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import List from "./components/List";
 import Form from "./components/Form";
@@ -16,15 +16,16 @@ export default function App() {
       title: value,
       completed: false,
     };
-
     setTodoData((prev) => [...prev, newTodo]);
     setValue("");
+    localStorage.setItem("todoData", JSON.stringify([...todoData, newTodo]));
   };
 
   const handleClick = useCallback(
     (id) => {
       const newTodoData = todoData.filter((todo) => todo.id !== id);
       setTodoData(newTodoData);
+      localStorage.setItem("todoData", JSON.stringify(newTodoData));
     },
     [todoData]
   );
@@ -32,6 +33,16 @@ export default function App() {
   const handleRemoveClick = () => {
     setTodoData([]);
   };
+
+  useEffect(() => {
+    const initialTodoData = localStorage.getItem("todoData");
+
+    try {
+      setTodoData(initialTodoData ? JSON.parse(initialTodoData) : []);
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-blue-100">
