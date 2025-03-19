@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./Modal.css";
+import useOnClickOutside from "../../hooks/useOnClickOutside";
 
 const Modal = ({
   title,
@@ -11,10 +12,14 @@ const Modal = ({
   vote_average,
   overview,
 }) => {
+  const ref = useRef();
+  useOnClickOutside(ref, () => {
+    setModalOpen(false);
+  });
   return (
     <div className="presentation">
       <div className="wrapper-modal">
-        <div className="modal">
+        <div className="modal" ref={ref}>
           <span onClick={() => setModalOpen(false)} className="modal-close">
             X
           </span>
