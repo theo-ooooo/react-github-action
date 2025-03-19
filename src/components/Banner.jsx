@@ -4,7 +4,7 @@ import requests from "../api/requests";
 import "./Banner.css";
 import styled from "styled-components";
 
-export const Banner = () => {
+const Banner = () => {
   const [movie, setMovie] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
 
@@ -120,3 +120,5 @@ const Iframe = styled.iframe`
     height: 100%;
   }
 `;
+
+export default Banner;

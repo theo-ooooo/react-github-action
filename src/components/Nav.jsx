@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Nav.css";
 
-export const Nav = () => {
+const Nav = () => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      console.log(window.scrollY);
       if (window.scrollY > 50) {
         setShow(true);
       } else {
@@ -33,3 +32,5 @@ export const Nav = () => {
     </nav>
   );
 };
+
+export default Nav;
