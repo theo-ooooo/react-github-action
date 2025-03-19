@@ -2,6 +2,7 @@ import axios from "../../api/axios";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./SearchPage.css";
+import { useDebounce } from "../../hooks/useDebounce";
 
 function SearchPage() {
   const [searchMovies, setSearchMovies] = useState([]);
@@ -9,10 +10,11 @@ function SearchPage() {
     return new URLSearchParams(useLocation().search);
   };
 
-  const searchTerm = useQuery().get("q");
+  const searchTerm = useDebounce(useQuery().get("q"), 500);
 
   useEffect(() => {
     if (searchTerm) {
+      console.log(searchTerm);
       fetchSearchMovie(searchTerm);
     }
   }, [searchTerm]);
@@ -34,7 +36,7 @@ function SearchPage() {
         {searchMovies.map((movie) => {
           if (movie.backdrop_path !== null && movie.media_type !== "person") {
             return (
-              <div className="movie">
+              <div className="movie" key={movie.id}>
                 <div className="movie__column-poster">
                   <img
                     src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
